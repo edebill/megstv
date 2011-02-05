@@ -29,3 +29,5 @@ gem 'pg'
 # group :development, :test do
 #   gem 'webrat'
 # end
+
+gem "jquery-rails", "0.2.6"
