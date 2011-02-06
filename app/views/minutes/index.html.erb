@@ -1,0 +1,27 @@
+<h1>Listing minutes</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Amount</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @minutes.each do |minute| %>
+  <tr>
+    <td><%= minute.user_id %></td>
+    <td><%= minute.amount %></td>
+    <td><%= minute.description %></td>
+    <td><%= link_to 'Show', minute %></td>
+    <td><%= link_to 'Edit', edit_minute_path(minute) %></td>
+    <td><%= link_to 'Destroy', minute, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Minute', new_minute_path %>

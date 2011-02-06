@@ -1,4 +1,11 @@
 Megstv::Application.routes.draw do
+  resources :minutes
+
+  get "welcome/index"
+  root :to => "welcome#index"
+
+  devise_for :users
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

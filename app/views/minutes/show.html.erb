@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @minute.user_id %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @minute.amount %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @minute.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_minute_path(@minute) %> |
+<%= link_to 'Back', minutes_path %>

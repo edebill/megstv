@@ -31,3 +31,4 @@ gem 'pg'
 # end
 
 gem "jquery-rails", "0.2.6"
+gem "devise", "1.1.5"
