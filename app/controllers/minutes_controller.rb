@@ -2,6 +2,11 @@ class MinutesController < ApplicationController
   # GET /minutes
   # GET /minutes.xml
   def index
+    unless current_user.family
+      return redirect_to :controller => "families", :action => "new"
+    end
+
+
     @minutes = Minute.all
 
     respond_to do |format|

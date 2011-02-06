@@ -1,0 +1,5 @@
+<% if user_signed_in? && current_user.parent && current_user.family %>
+  <li>
+  <%= link_to('Family', edit_family_path) %>        
+  </li>
+<% end %>

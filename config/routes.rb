@@ -1,4 +1,7 @@
 Megstv::Application.routes.draw do
+  resources :families
+  post "families/add_user"
+
   resources :minutes
 
   get "welcome/index"

@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   defaults :display_name => "e.g. mom", :email => "e.g. you@somewhere.com"
 
-  has_many :family_members
+  belongs_to :family
 
   has_many :minutes
   
