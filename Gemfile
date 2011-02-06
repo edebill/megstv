@@ -32,3 +32,4 @@ gem 'pg'
 
 gem "jquery-rails", "0.2.6"
 gem "devise", "1.1.5"
+gem "active_record_defaults", "1.0.1"

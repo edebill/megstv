@@ -4,7 +4,7 @@ class CreateMinutes < ActiveRecord::Migration
       t.integer :user_id
       t.integer :child_id
       t.integer :amount
-      t.string :description
+      t.string  :description
 
       t.timestamps
     end

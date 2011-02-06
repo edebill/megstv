@@ -6,9 +6,30 @@ class User < ActiveRecord::Base
          :lockable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :display_name
 
+  defaults :display_name => "e.g. mom", :email => "e.g. you@somewhere.com"
+
+  has_many :family_members
 
   has_many :minutes
   
+  before_validation :blank_defaults
+
+
+  private
+
+  def blank_defaults
+    defaults = self.class.new
+    
+    self.attributes.keys.each do |attribute|
+      if((! self.attributes[attribute].blank?) &&
+         self.attributes[attribute].to_s.starts_with?( "e.g." ) &&
+         ( self.attributes[attribute] == defaults.attributes[attribute]) )
+
+        self.attributes= { attribute => "" }
+      end
+    end
+  end
+
 end

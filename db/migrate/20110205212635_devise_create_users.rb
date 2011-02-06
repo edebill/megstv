@@ -11,6 +11,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.token_authenticatable
 
       t.boolean :parent, :default => true
+      t.string  :display_name
+      t.integer :family_id
 
       t.timestamps
     end
@@ -19,6 +21,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
     add_index :users, :reset_password_token, :unique => true
     add_index :users, :confirmation_token,   :unique => true
     add_index :users, :unlock_token,         :unique => true
+    add_index :users, :family_id
   end
 
   def self.down

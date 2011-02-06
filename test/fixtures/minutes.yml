@@ -1,11 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  user_id: 
-  amount: 
+  user_id: 1
+  amount: 1
   description: MyString
 
 two:
-  user_id: 
-  amount: 
+  user_id: 2
+  amount: 2
   description: MyString
