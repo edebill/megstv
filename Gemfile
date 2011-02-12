@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
+gem 'rails', '3.0.4'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -30,6 +30,6 @@ gem 'pg'
 #   gem 'webrat'
 # end
 
-gem "jquery-rails", "0.2.6"
+gem "jquery-rails", "0.2.7"
 gem "devise", "1.1.5"
 gem "active_record_defaults", "1.0.1"
