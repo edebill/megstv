@@ -1,9 +1,9 @@
-class MinutesController < ApplicationController
+class MinutesController < AuthenticatedController
   # GET /minutes
   # GET /minutes.xml
   def index
     unless current_user.family
-      return redirect_to :controller => "families", :action => "new"
+      return redirect_to :controller => "family", :action => "index"
     end
 
 
@@ -61,7 +61,9 @@ class MinutesController < ApplicationController
   # PUT /minutes/1
   # PUT /minutes/1.xml
   def update
-    @minute = Minute.find(params[:id])
+    @minute = Minute.find_by_id_and_user_id(params[:id], current_user.id)
+
+#    @minute || return head :not_found
 
     respond_to do |format|
       if @minute.update_attributes(params[:minute])

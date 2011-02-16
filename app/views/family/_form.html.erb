@@ -1,0 +1,31 @@
+<%= form_for @new_user,
+             :url => { :controller => "family", :action => "add_member" }  do |f| %>
+    <% if @new_user.errors.any? %>
+    <div id="error_explanation">
+        <h2><%= pluralize(@new_user.errors.count, "error") %> kept us from saving this new family member:</h2>
+        <ul>
+        <% @new_user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+    </div>
+    <% end %>
+    <table>
+    <tr>
+        <th><%= f.label :parent %></th>
+        <th><%= f.label :display_name %></th>
+        <th><%= f.label :email %></th>
+        <th><%= f.label :password %></th>
+        <th><%= f.label :password_confirmation %></th>
+        <td rowspan="2" valign="bottom"><button class="add-person">create</button></td>
+    </tr>
+    <tr>
+        <td><%= f.check_box :parent %></td>
+        <td><%= f.text_field :display_name, :size => 15 %></td>
+        <td><%= f.text_field :email %></td>
+        <td><%= f.password_field :password, :size => 12 %></td>
+        <td><%= f.password_field :password_confirmation, :size => 12 %></td>
+    </tr>
+    </table>
+
+<% end %>

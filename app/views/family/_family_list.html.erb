@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th>Parent?</th>
+    <th>Display Name</th>
+    <th>Email</th>
+  </tr>
+<% @family_members.sort { |a,b| a.display_name <=> b.display_name }.each do |member| %>
+  <tr>
+    <td><input type="checkbox" <% if member.parent %>checked<% end %> /></td>
+    <td><%= member.display_name %></td>
+    <td><%= member.email %></td>
+  </tr>
+<% end %> 
+</table>

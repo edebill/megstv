@@ -12,7 +12,9 @@ class User < ActiveRecord::Base
 
   belongs_to :family
 
-  has_many :minutes
+  has_many :entered_minutes, :class_name => "Minute", :foreign_key => "user_id", :source => :creator
+  has_many :minutes, :foreign_key => "child_id", :source => :child
+
   
   before_validation :blank_defaults
 

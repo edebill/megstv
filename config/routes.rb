@@ -1,6 +1,6 @@
 Megstv::Application.routes.draw do
-  resources :families
-  post "families/add_user"
+  match 'family' => 'family#index', :as => "family_index"
+  post "family/add_member"
 
   resources :minutes
 

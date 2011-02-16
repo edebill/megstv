@@ -1,8 +1,15 @@
 require 'test_helper'
 
 class MinutesControllerTest < ActionController::TestCase
+  self.use_transactional_fixtures = false
   setup do
-    @minute = minutes(:one)
+    Minute.destroy_all
+    User.destroy_all
+    @minute = Factory(:minute)
+    @user   = @minute.user
+    sign_in @user
+    
+    @new_minute = Factory.build(:minute, :user_id => @user.id)
   end
 
   test "should get index" do
@@ -18,7 +25,7 @@ class MinutesControllerTest < ActionController::TestCase
 
   test "should create minute" do
     assert_difference('Minute.count') do
-      post :create, :minute => @minute.attributes
+      post :create, :minute => @new_minute.attributes
     end
 
     assert_redirected_to minute_path(assigns(:minute))
@@ -35,7 +42,8 @@ class MinutesControllerTest < ActionController::TestCase
   end
 
   test "should update minute" do
-    put :update, :id => @minute.to_param, :minute => @minute.attributes
+    @minute.amount = -1
+    put :update, :id => @minute.id.to_param, :minute => @minute.attributes
     assert_redirected_to minute_path(assigns(:minute))
   end
 
@@ -46,4 +54,5 @@ class MinutesControllerTest < ActionController::TestCase
 
     assert_redirected_to minutes_path
   end
+
 end

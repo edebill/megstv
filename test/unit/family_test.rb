@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class FamilyTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
+  # doesn't really do anything...
   test "the truth" do
     assert true
   end

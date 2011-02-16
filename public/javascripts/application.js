@@ -1,3 +1,7 @@
+
+
+
+
 $(document).ready(function(){
     $(':input').each(function(index, element){
         if ($(element).val().match("^e\.g\.")){
