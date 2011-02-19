@@ -8,6 +8,8 @@ class MinutesController < AuthenticatedController
 
 
     @minutes = Minute.all
+    @minute = Minute.new(:child_id => current_user.family.children.first.try(:id),
+                         :user_id => current_user.id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -49,10 +51,11 @@ class MinutesController < AuthenticatedController
 
     respond_to do |format|
       if @minute.save
-        format.html { redirect_to(@minute, :notice => 'Minute was successfully created.') }
+        format.html { redirect_to minutes_url, :notice => 'Minute was successfully created.' }
         format.xml  { render :xml => @minute, :status => :created, :location => @minute }
       else
-        format.html { render :action => "new" }
+        @minutes = Minute.all
+        format.html { render :action => "index" }
         format.xml  { render :xml => @minute.errors, :status => :unprocessable_entity }
       end
     end
@@ -67,10 +70,11 @@ class MinutesController < AuthenticatedController
 
     respond_to do |format|
       if @minute.update_attributes(params[:minute])
-        format.html { redirect_to(@minute, :notice => 'Minute was successfully updated.') }
+        format.html { redirect_to minutes_url, :notice => 'Minute was successfully updated.' }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
+        @minutes = Minute.all
+        format.html { render :action => "index" }
         format.xml  { render :xml => @minute.errors, :status => :unprocessable_entity }
       end
     end

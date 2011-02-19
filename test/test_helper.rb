@@ -4,7 +4,7 @@ require 'rails/test_help'
 require 'minitest/autorun'
 require 'minitest/spec'
 require 'factory_girl_rails'
-require 'shoulda'
+#require 'shoulda'
 
 class ActiveSupport::TestCase
 
@@ -22,5 +22,5 @@ end
 class ActionController::TestCase
   include Devise::TestHelpers
 
-  self.use_transactional_fixtures = true
+#  self.use_transactional_fixtures = true
 end

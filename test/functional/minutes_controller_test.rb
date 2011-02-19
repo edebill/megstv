@@ -28,7 +28,7 @@ class MinutesControllerTest < ActionController::TestCase
       post :create, :minute => @new_minute.attributes
     end
 
-    assert_redirected_to minute_path(assigns(:minute))
+    assert_redirected_to minutes_url
   end
 
   test "should show minute" do
@@ -44,7 +44,7 @@ class MinutesControllerTest < ActionController::TestCase
   test "should update minute" do
     @minute.amount = -1
     put :update, :id => @minute.id.to_param, :minute => @minute.attributes
-    assert_redirected_to minute_path(assigns(:minute))
+    assert_redirected_to minutes_url
   end
 
   test "should destroy minute" do
