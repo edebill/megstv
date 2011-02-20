@@ -48,4 +48,17 @@ describe Family do
       assert_equal 2, @family.children.length
     end
   end
+
+
+  describe "member?" do
+    it "is false when candidate is not in family" do
+      @cand = Factory(:user)
+      refute @family.member? @cand
+    end
+
+    it "is true when cacndidate is in family" do
+      @cand = Factory(:user, :family => @family)
+      assert @family.member? @cand
+    end
+  end
 end

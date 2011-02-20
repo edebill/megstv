@@ -1,0 +1,7 @@
+<% if @children.empty? %>
+You don't have any children!
+<% else %>
+  <% @children.each do |child| %>
+  <%= render :partial => 'parent_child', :locals => { :child => child } %>
+  <% end %>
+<% end %>

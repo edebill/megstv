@@ -8,19 +8,18 @@ class MinutesControllerTest < ActionController::TestCase
     @minute = Factory(:minute)
     @user   = @minute.user
     sign_in @user
-    
-    @new_minute = Factory.build(:minute, :user_id => @user.id)
+    @child = @minute.child
+    @child.family = @user.family
+    @child.save
+
+    @new_minute = Factory.build(:minute, :user_id => @user.id,
+                                :child_id => @child.id)
   end
 
   test "should get index" do
     get :index
     assert_response :success
     assert_not_nil assigns(:minutes)
-  end
-
-  test "should get new" do
-    get :new
-    assert_response :success
   end
 
   test "should create minute" do
@@ -33,11 +32,6 @@ class MinutesControllerTest < ActionController::TestCase
 
   test "should show minute" do
     get :show, :id => @minute.to_param
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, :id => @minute.to_param
     assert_response :success
   end
 

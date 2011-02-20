@@ -12,5 +12,6 @@ class Minute < ActiveRecord::Base
 
   def update_totals
     self.child.update_current_minutes
+    self.child.save
   end
 end

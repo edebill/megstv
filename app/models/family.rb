@@ -9,5 +9,8 @@ class Family < ActiveRecord::Base
     @parents ||= self.members.select { |m| m.parent }
   end
 
+  def member?(candidate)
+    self.members.include? candidate
+  end
 
 end

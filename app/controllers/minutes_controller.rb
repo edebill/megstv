@@ -6,13 +6,14 @@ class MinutesController < AuthenticatedController
       return redirect_to :controller => "family", :action => "index"
     end
 
-
-    @minutes = Minute.all
-    @minute = Minute.new(:child_id => current_user.family.children.first.try(:id),
-                         :user_id => current_user.id)
+    if current_user.parent
+      @children = current_user.family.children
+    else
+      @children = [ current_user ]
+    end
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render "parent" }
       format.xml  { render :xml => @minutes }
     end
   end
@@ -28,17 +29,6 @@ class MinutesController < AuthenticatedController
     end
   end
 
-  # GET /minutes/new
-  # GET /minutes/new.xml
-  def new
-    @minute = Minute.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @minute }
-    end
-  end
-
   # GET /minutes/1/edit
   def edit
     @minute = Minute.find(params[:id])
@@ -47,7 +37,18 @@ class MinutesController < AuthenticatedController
   # POST /minutes
   # POST /minutes.xml
   def create
-    @minute = Minute.new(params[:minute])
+    @child = nil
+    if current_user.parent
+      @child = current_user.family.children.select { |c| c.id == params[:minute][:child_id].try(:to_i) }.first
+    else
+      @child = current_user
+    end
+    
+    return head :status => :not_found unless @child
+
+    @minute = Minute.new(params[:minute].merge( :user_id => current_user.id,
+                                                :child_id => @child.id,
+                                                :child => @child ))
 
     respond_to do |format|
       if @minute.save
