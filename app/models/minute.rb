@@ -8,5 +8,9 @@ class Minute < ActiveRecord::Base
 
   validates_numericality_of :amount, :only_integer => true
 
+  after_save :update_totals
 
+  def update_totals
+    self.child.update_current_minutes
+  end
 end

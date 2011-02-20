@@ -35,6 +35,13 @@ describe Minute do
       assert @minute.valid?
     end
 
+    it "should update child's current minutes on save" do
+      @child = @minute.child
+      old_minutes = @child.current_minutes
+      @new_minute = Factory(:minute, :amount => 3, :child => @child)
+      assert_equal @child.id, @new_minute.child.id
+      refute_equal old_minutes, @new_minute.child.current_minutes
+    end
   end
 
 end

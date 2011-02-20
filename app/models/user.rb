@@ -19,6 +19,14 @@ class User < ActiveRecord::Base
   before_validation :blank_defaults
 
 
+  def calculate_current_minutes
+    self.minutes.collect { |m| m.amount }.sum
+  end
+
+  def update_current_minutes
+    self.current_minutes = self.calculate_current_minutes
+  end
+
   private
 
   def blank_defaults

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110206163216) do
+ActiveRecord::Schema.define(:version => 20110220154439) do
 
   create_table "families", :force => true do |t|
     t.datetime "created_at"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20110206163216) do
     t.integer  "family_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "current_minutes"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
