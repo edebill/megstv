@@ -18,6 +18,9 @@ class User < ActiveRecord::Base
   
   before_validation :blank_defaults
 
+  def latest_minutes
+    Minute.where(:child_id => self.id).order('created_at desc').limit(10).reverse
+  end
 
   def calculate_current_minutes
     self.minutes.collect { |m| m.amount }.sum

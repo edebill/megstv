@@ -1,6 +1,6 @@
 <h2><%= child.display_name %></h2>
 <table class="time_log">
-<% child.minutes.each do |minute| %>
+<% child.latest_minutes.each do |minute| %>
   <tr>
     <td class="amount_cell"><%= minute.amount %></td>
     <td><%= minute.user.display_name %></td>
