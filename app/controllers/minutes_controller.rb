@@ -42,6 +42,9 @@ class MinutesController < AuthenticatedController
       @child = current_user.family.children.select { |c| c.id == params[:minute][:child_id].try(:to_i) }.first
     else
       @child = current_user
+      if params[:minute][:amount].to_i > 0
+        params[:minute][:amount] = params[:minute][:amount].to_i * -1
+      end
     end
     
     return head :status => :not_found unless @child

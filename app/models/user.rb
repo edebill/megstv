@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   def can_edit?(minute)
     self.family.member?(minute.child) &&
         ( self.parent ||
-          ((self.id == minute.child_id) &&
+          ((self.id == minute.user_id) &&
            (minute.created_at > (Time.now - 5.minutes))))
   end
 
