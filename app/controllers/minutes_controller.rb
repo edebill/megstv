@@ -67,7 +67,9 @@ class MinutesController < AuthenticatedController
   def update
     @minute = Minute.find_by_id_and_user_id(params[:id], current_user.id)
 
-#    @minute || return head :not_found
+    unless @minute && current_user.can_edit?(@minute)
+      return redirect_to minutes_url, :error => "You don't have permission to edit that."
+    end
 
     respond_to do |format|
       if @minute.update_attributes(params[:minute])

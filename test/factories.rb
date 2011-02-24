@@ -33,7 +33,7 @@ end
 Factory.define :minute do |f|
   f.amount      1
   f.description "did something or other"
-
+  f.created_at { Time.now }
   f.association :user,  :factory => :parent_user
   f.association :child, :factory => :child_user
 

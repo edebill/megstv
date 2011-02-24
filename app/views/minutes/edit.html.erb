@@ -1,6 +1,6 @@
 <h1>Editing minute</h1>
 
-<%= render 'form' %>
+<%= render :partial => 'form', :locals => { :minute => @minute }  %>
 
 <%= link_to 'Show', @minute %> |
 <%= link_to 'Back', minutes_path %>

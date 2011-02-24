@@ -27,6 +27,13 @@ class User < ActiveRecord::Base
     self.current_minutes = self.calculate_current_minutes
   end
 
+  def can_edit?(minute)
+    self.family.member?(minute.child) &&
+        ( self.parent ||
+          ((self.id == minute.child_id) &&
+           (minute.created_at > (Time.now - 5.minutes))))
+  end
+
   private
 
   def blank_defaults

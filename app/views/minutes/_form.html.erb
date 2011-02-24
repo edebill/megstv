@@ -11,23 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :child_id %><br />
-    <%= f.text_field :child_id %>
-  </div>
-  <div class="field">
-    <%= f.label :amount %><br />
-    <%= f.text_field :amount %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.hidden_field :child_id %>
+  <table>
+   <tr>
+    <th><%= f.label :amount %></th>
+    <th><%= f.label :description %></th>
+    <th></th>
+   </tr>
+   <tr>
+    <td><%= f.text_field :amount %></td>
+    <td><%= f.text_field :description %></td>
+    <td><%= f.submit %></td>
+   </tr>
+  </table>
 <% end %>

@@ -5,21 +5,19 @@ class MinutesControllerTest < ActionController::TestCase
   setup do
     Minute.destroy_all
     User.destroy_all
-    @minute = Factory(:minute)
-    @user   = @minute.user
-    sign_in @user
-    @child = @minute.child
-    @child.family = @user.family
-    @child.save
+    @parent = Factory(:parent_user)
+    @child = Factory(:child_user, :family => @parent.family)
+    @minute = Factory(:minute, :user => @parent, :child => @child)
+    sign_in @parent
 
-    @new_minute = Factory.build(:minute, :user_id => @user.id,
+    @new_minute = Factory.build(:minute, :user_id => @parent.id,
                                 :child_id => @child.id)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:minutes)
+    assert_not_nil assigns(:children)
   end
 
   test "should create minute" do
@@ -39,6 +37,16 @@ class MinutesControllerTest < ActionController::TestCase
     @minute.amount = -1
     put :update, :id => @minute.id.to_param, :minute => @minute.attributes
     assert_redirected_to minutes_url
+    assert_equal -1, Minute.find(@minute.id).amount
+  end
+
+  test "should not update minute for other family" do
+    @other_minute = Factory(:minute)
+    @other_minute.amount = @other_minute.amount + 1
+    
+    put :update, :id => @other_minute.id.to_param, :minute => @other_minute.attributes
+    assert_redirected_to minutes_url
+    refute_equal Minute.find(@other_minute.id).amount, @other_minute.amount
   end
 
   test "should destroy minute" do

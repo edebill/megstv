@@ -11,3 +11,16 @@ ul.hmenu li {
 input.example {
   opacity: 0.5;
 }
+
+.time_log td {
+    padding: 3px 10px 3px 10px;
+}
+
+.time_log .amount_cell {
+    text-align: right;
+}
+
+.time_log .total_row td {
+    border-top: 1px solid black;
+    font-weight: bold;
+}

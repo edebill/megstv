@@ -1,9 +1,19 @@
 <h2><%= child.display_name %></h2>
-<table>
+<table class="time_log">
 <% child.minutes.each do |minute| %>
-<tr><td><%= minute.amount %></td><td><%= minute.user.display_name %></td><td><%= minute.description %></td></tr>
+  <tr>
+    <td class="amount_cell"><%= minute.amount %></td>
+    <td><%= minute.user.display_name %></td>
+    <td><%= minute.description %></td>
+    <td><% if current_user.can_edit?(minute) %><%= link_to "edit", edit_minute_path(minute) %><% end %></td>
+  </tr>
 <% end %>
-<tr class="total_row"><td><%= child.current_minutes %></td><td></td><td>total</td></tr>
+  <tr class="total_row">
+    <td><%= child.current_minutes %></td>
+    <td></td>
+    <td>total</td>
+    <td></td>
+  </tr>
 </table>
 <%  minute = Minute.new(:child_id => child.id,
                         :user_id => current_user.id)
