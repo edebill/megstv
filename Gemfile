@@ -9,7 +9,7 @@ gem 'heroku'
 
 gem 'pg'
 
-gem 'memcache-client', :require => 'memcache'
+gem 'dalli'
 
 # Use unicorn as the web server
 # gem 'unicorn'
