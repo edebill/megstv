@@ -31,8 +31,10 @@ gem 'memcache-client', :require => 'memcache'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
  group :development, :test do
+   gem 'simplecov', '~> 0.4.0', :require => false
    gem 'factory_girl_rails'
    gem 'shoulda', "3.0.0.beta2"
+   gem 'mocha'
 #   gem 'webrat'
  end
 

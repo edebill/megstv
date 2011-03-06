@@ -1,15 +1,11 @@
 class MinutesController < AuthenticatedController
+  before_filter :load_children
+
   # GET /minutes
   # GET /minutes.xml
   def index
     unless current_user.family
       return redirect_to :controller => "family", :action => "index"
-    end
-
-    if current_user.parent
-      @children = current_user.family.children
-    else
-      @children = [ current_user ]
     end
 
     respond_to do |format|
@@ -59,7 +55,7 @@ class MinutesController < AuthenticatedController
         format.xml  { render :xml => @minute, :status => :created, :location => @minute }
       else
         @minutes = Minute.all
-        format.html { render :action => "index" }
+        format.html { render :template => 'minutes/parent' }
         format.xml  { render :xml => @minute.errors, :status => :unprocessable_entity }
       end
     end
@@ -68,7 +64,13 @@ class MinutesController < AuthenticatedController
   # PUT /minutes/1
   # PUT /minutes/1.xml
   def update
-    @minute = Minute.find_by_id_and_user_id(params[:id], current_user.id)
+
+    if current_user.parent
+      @minute = Minute.find_by_id_and_user_id(params[:id], current_user.id)
+    else
+      @minute = Minute.find_by_id_and_child_id(params[:id], current_user.id)
+    end
+
 
     unless @minute && current_user.can_edit?(@minute)
       return redirect_to minutes_url, :error => "You don't have permission to edit that."
@@ -80,7 +82,7 @@ class MinutesController < AuthenticatedController
         format.xml  { head :ok }
       else
         @minutes = Minute.all
-        format.html { render :action => "index" }
+        format.html { render :template => "minutes/parent" }
         format.xml  { render :xml => @minute.errors, :status => :unprocessable_entity }
       end
     end
@@ -97,4 +99,15 @@ class MinutesController < AuthenticatedController
       format.xml  { head :ok }
     end
   end
+
+  def load_children
+    if current_user.parent
+      @children = current_user.family.try(:children)
+      @children ||= []
+    else
+      @children = [ current_user ]
+    end
+  end
+
+
 end

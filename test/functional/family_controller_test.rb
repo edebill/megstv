@@ -18,6 +18,17 @@ class FamilyControllerTest < ActionController::TestCase
     assert_not_nil assigns(:family_members)
   end
 
+
+  test "should get index ( no family )" do
+    @user.family = nil
+    @user.save
+    @family.destroy
+
+    get :index
+    assert_response :success
+    assert_not_nil assigns(:family_members)
+  end
+
   test "should create User" do
     assert_difference('User.count') do
       post :add_member, :user => @new_user.attributes.merge( { :password => "password",
