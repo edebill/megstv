@@ -21,12 +21,15 @@ class FamilyController < AuthenticatedController
 
 
   def add_member
-    Rails.logger.warn params.to_json
-
     @email = params[:user][:email]
 
     @new_user = User.new(params[:user])
 
+    if params[:user][:parent].to_s == "1"
+      @new_user.parent = true
+    else
+      @new_user.parent = false
+    end
     @new_user.family = current_user.family
     @new_user.confirmed_at = Time.now
     
@@ -34,7 +37,6 @@ class FamilyController < AuthenticatedController
       if @new_user.save
         return redirect_to family_index_url, :notice => "family member added"
       else
-        Rails.logger.warn @new_user.errors.full_messages
         load_family_members
         format.html { render :action => "new" }
         #          format.json  { render :json => @new_user.errors, :status => :unprocessable_entity }
