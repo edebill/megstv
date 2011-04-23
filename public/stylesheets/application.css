@@ -1,3 +1,43 @@
+body {
+    background-color: #000080;
+    margin: 0px;
+}
+
+.container_12 {
+    background-color: #000080;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container {
+    padding: 0 10px 0 10px;
+}
+
+#title h1 {
+    color: #000;
+}
+
+#title a {
+    text-decoration: none;
+}
+
+#body {
+    padding-bottom: 40px;
+    min-height: 600px;
+}
+
+#footer {
+    position: relative;
+    margin-top: -40px;
+    height: 39px;
+    clear: both;
+    border-top: 1px black solid;
+}
+
+.white-background {
+    background: white;
+}
+
 ul.hmenu {
   list-style: none;	
   margin: 0 0 2em;
@@ -7,6 +47,7 @@ ul.hmenu {
 ul.hmenu li {
   display: inline;  
 }
+
 
 input.example {
   opacity: 0.5;
@@ -24,3 +65,5 @@ input.example {
     border-top: 1px solid black;
     font-weight: bold;
 }
+
+

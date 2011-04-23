@@ -8,12 +8,28 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-<ul class="hmenu">
-  <%= render 'devise/menu/registration_items' %>
-  <%= render 'devise/menu/family_items' %>
-  <%= render 'devise/menu/login_items' %>
-</ul>
-<%= yield %>
+  <div class="container_12">
+    <div class="grid_12 white-background" id="title">
+      <div class="container">   
+        <h1><a href="/">Meg's TV</a></h1>
+      </div>  
+    </div>
+    <div class="grid_12 white-background" id="body">
+      <div class="container">   
+        <ul class="hmenu">
+          <%= render 'devise/menu/registration_items' %>
+          <%= render 'devise/menu/family_items' %>
+          <%= render 'devise/menu/login_items' %>
+        </ul>
+        <%= yield %>
+      </div>
+    </div>
+    <div class="grid_12 white-background" id="footer">
+      <div class="container">
+        This is my footer.  You should worship it.
 
+      </div>
+    </div>
+  </div>
 </body>
 </html>

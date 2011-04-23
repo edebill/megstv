@@ -11,6 +11,8 @@ gem 'pg'
 
 gem 'dalli'
 
+gem 'haml'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
