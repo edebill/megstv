@@ -1,4 +1,5 @@
 class Minute < ActiveRecord::Base
+  has_paper_trail
 
   belongs_to :user
   belongs_to :child, :class_name => 'User', :foreign_key => 'child_id'

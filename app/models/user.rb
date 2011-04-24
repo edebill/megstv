@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   end
 
   def calculate_current_minutes
-    self.minutes.collect { |m| m.amount }.sum
+    self.minutes.reload.collect { |m| m.amount }.sum
   end
 
   def update_current_minutes

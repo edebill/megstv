@@ -12,6 +12,7 @@ gem 'pg'
 gem 'dalli'
 
 gem 'haml'
+gem 'paper_trail'
 
 # Use unicorn as the web server
 # gem 'unicorn'
