@@ -53,6 +53,7 @@ input.example {
   opacity: 0.5;
 }
 
+
 .time_log td {
     padding: 3px 10px 3px 10px;
 }
@@ -66,4 +67,23 @@ input.example {
     font-weight: bold;
 }
 
+input#minute_amount {
+    text-align: right;
+}
 
+input::-webkit-input-placeholder {
+    text-align: right;
+}
+
+.hint {
+    opacity: 0.5;
+    font-size: 7pt;
+}
+
+div.scratch {
+    margin-top: 20px;
+}
+
+label {
+    font-weight: bold;
+}

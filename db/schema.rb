@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110424151215) do
+ActiveRecord::Schema.define(:version => 20110514152255) do
 
   create_table "families", :force => true do |t|
     t.datetime "created_at"
@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(:version => 20110424151215) do
   end
 
   add_index "minutes", ["user_id"], :name => "index_minutes_on_user_id"
+
+  create_table "scratches", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scratches", ["user_id"], :name => "index_scratches_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                               :default => "",   :null => false

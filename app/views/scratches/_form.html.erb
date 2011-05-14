@@ -1,0 +1,7 @@
+<%= form_for(@scratch) do |f| %>
+  <div class="scratch">
+    <%= f.hidden_field :user_id %>
+    <label for="scratch_body">Scratch</label><br />
+    <%= f.text_area :body, :rows => 10, :cols => 50, :placeholder => 'started at 6:43' %>
+  </div>
+<% end %>

@@ -40,3 +40,8 @@ Factory.define :minute do |f|
 
 end
 
+Factory.define :scratch do |f|
+  f.association :user, :factory => :child_user
+  f.body "7:45"
+end
+  

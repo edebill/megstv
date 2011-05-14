@@ -1,4 +1,6 @@
 Megstv::Application.routes.draw do
+  resources :scratches
+
   match 'family' => 'family#index', :as => "family_index"
   post "family/add_member"
 

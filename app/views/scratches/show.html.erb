@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @scratch.user_id %>
+</p>
+
+<p>
+  <b>Body:</b>
+  <%= @scratch.body %>
+</p>
+
+
+<%= link_to 'Edit', edit_scratch_path(@scratch) %> |
+<%= link_to 'Back', scratches_path %>

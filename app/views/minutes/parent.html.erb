@@ -5,3 +5,7 @@ You don't have any children!
   <%= render :partial => 'parent_child', :locals => { :child => child } %>
   <% end %>
 <% end %>
+<% unless current_user.parent %>
+  <% @scratch = current_user.scratches.first || current_user.scratches.create %>
+  <%= render :partial => 'scratches/form' %>
+<% end %>

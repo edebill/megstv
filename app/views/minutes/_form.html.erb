@@ -14,13 +14,13 @@
   <%= f.hidden_field :child_id %>
   <table>
    <tr>
-    <th><%= f.label :amount %></th>
+    <th><%= f.label :amount %> <span class="hint">(in minutes)</span></th>
     <th><%= f.label :description %></th>
     <th></th>
    </tr>
    <tr>
-    <td><%= f.text_field :amount %></td>
-    <td><%= f.text_field :description %></td>
+    <td><%= f.text_field :amount, :size => 12, :placeholder => 23 %></td>
+    <td><%= f.text_field :description, :size => 45, :maxlength => 200, :placeholder => 'Scooby Doo - Hastle in the Castle' %></td>
     <td><%= f.submit "update" %></td>
    </tr>
   </table>

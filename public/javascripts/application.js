@@ -1,7 +1,6 @@
 
 
 
-
 $(document).ready(function(){
     $(':input').each(function(index, element){
         if ($(element).val().match("^e\.g\.")){
@@ -11,4 +10,11 @@ $(document).ready(function(){
             });
         }
     });
+
+    $('textarea#scratch_body').keyup(function(event) {
+        form = event.target.form
+        $.post(form.action, $(form).serialize());
+        return false;
+    });
+
 });

@@ -1,0 +1,25 @@
+<h1>Listing scratches</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Body</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @scratches.each do |scratch| %>
+  <tr>
+    <td><%= scratch.user_id %></td>
+    <td><%= scratch.body %></td>
+    <td><%= link_to 'Show', scratch %></td>
+    <td><%= link_to 'Edit', edit_scratch_path(scratch) %></td>
+    <td><%= link_to 'Destroy', scratch, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Scratch', new_scratch_path %>
