@@ -3,7 +3,7 @@
 <% child.latest_minutes.each do |minute| %>
   <tr>
     <td class="amount_cell"><%= minute.amount %></td>
-    <td><%= minute.created_at.localtime.strftime("%h %d, %H:%M") %></td>
+    <td><%= minute.created_at.strftime("%h %d, %H:%M") %></td>
     <td><%= minute.user.display_name %></td>
     <td><%= minute.description %></td>
     <td><% if current_user.can_edit?(minute) %><%= link_to "edit", edit_minute_path(minute) %><% end %></td>
