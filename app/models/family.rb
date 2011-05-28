@@ -2,7 +2,7 @@ class Family < ActiveRecord::Base
   has_many :members, :class_name => 'User'
 
   def children
-    @children ||= self.members.reject { |m| m.parent }
+    @children ||= self.members.reject { |m| m.parent }.sort { |a,b| a.display_name <=> b.display_name }
   end
 
   def parents
