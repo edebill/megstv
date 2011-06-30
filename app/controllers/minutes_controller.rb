@@ -51,11 +51,12 @@ class MinutesController < AuthenticatedController
 
     respond_to do |format|
       if @minute.save
-        format.html { redirect_to minutes_url, :notice => 'Minute was successfully created.' }
+        format.html { redirect_to minutes_url, :notice => 'Time successfully saved!.' }
         format.xml  { render :xml => @minute, :status => :created, :location => @minute }
       else
+        Rails.logger.info("failed to save Minute - #{@minute.errors.full_messages}")
         @minutes = Minute.all
-        format.html { render :template => 'minutes/parent' }
+        format.html { redirect_to minutes_url,  :alert => @minute.errors.full_messages }
         format.xml  { render :xml => @minute.errors, :status => :unprocessable_entity }
       end
     end
@@ -65,15 +66,10 @@ class MinutesController < AuthenticatedController
   # PUT /minutes/1.xml
   def update
 
-    if current_user.parent
-      @minute = Minute.find_by_id_and_user_id(params[:id], current_user.id)
-    else
-      @minute = Minute.find_by_id_and_child_id(params[:id], current_user.id)
-    end
-
+    @minute = Minute.find(params[:id])
 
     unless @minute && current_user.can_edit?(@minute)
-      return redirect_to minutes_url, :error => "You don't have permission to edit that."
+      return redirect_to minutes_url, :alert => "You don't have permission to edit that."
     end
 
     respond_to do |format|

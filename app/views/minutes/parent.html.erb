@@ -1,6 +1,34 @@
 <% if @children.empty? %>
 You don't have any children!
 <% else %>
+  <% if flash[:alert] %>
+    <% Rails.logger.debug("flash message!") %>
+    <div class="alert">
+    <% if flash[:alert].respond_to? :each %>
+    <ul>
+      <% flash[:alert].each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+    <% else %>
+      <%= flash[:alert] %>
+    <% end %>
+    </div>
+  <% end %>
+  <% if flash[:notice] %>
+    <% Rails.logger.debug("flash message!") %>
+    <div class="notice">
+    <% if flash[:notice].respond_to? :each %>
+    <ul>
+      <% flash[:notice].each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+    <% else %>
+      <%= flash[:notice] %>
+    <% end %>
+    </div>
+  <% end %>
   <% @children.each do |child| %>
   <%= render :partial => 'parent_child', :locals => { :child => child } %>
   <% end %>

@@ -6,6 +6,7 @@ class MinutesControllerTest < ActionController::TestCase
     Minute.destroy_all
     User.destroy_all
     @parent = Factory(:parent_user)
+    @unknown_parent = Factory(:parent_user)
     @child = Factory(:child_user, :family => @parent.family)
     @minute = Factory(:minute, :user => @child, :child => @child)
     sign_in :user, @parent
@@ -61,7 +62,7 @@ class MinutesControllerTest < ActionController::TestCase
       post :create, :minute => @new_minute.attributes
     end
 
-    assert_response :success
+    assert_response :redirect
   end
 
   test "should show minute" do
@@ -78,6 +79,15 @@ class MinutesControllerTest < ActionController::TestCase
     assert_equal -1, Minute.find(@minute.id).amount
   end
 
+  test "parent should update minute" do
+    MinutesController.any_instance.stubs(:current_user).returns(@parent)
+
+    @minute.description = "something different"
+    put :update, :id => @minute.id.to_param, :minute => @minute.attributes
+    assert_redirected_to minutes_url
+    assert_equal "something different", Minute.find(@minute.id).description
+  end
+
 
   test "should not update minute (invalid)" do
     @minute.amount = ""
@@ -85,6 +95,17 @@ class MinutesControllerTest < ActionController::TestCase
     put :update, :id => @minute.id.to_param, :minute => @minute.attributes
 
     assert_equal 1, Minute.find(@minute.id).amount
+  end
+
+
+  test "should not update minute (not my child)" do
+    MinutesController.any_instance.stubs(:current_user).returns(@unknown_parent)
+    old_description  = @minute.description
+    @minute.description = "unknown parent"
+
+    put :update, :id => @minute.id.to_param, :minute => @minute.attributes
+
+    assert_equal old_description, Minute.find(@minute.id).description
   end
 
 

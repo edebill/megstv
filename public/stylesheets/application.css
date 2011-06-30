@@ -13,6 +13,19 @@ body {
     padding: 0 10px 0 10px;
 }
 
+
+div.alert {
+    color: #a00;
+    background-color: #fdd;
+    padding: 10px;
+}
+
+div.notice {
+    color: #0a0;
+    background-color: #dfd;
+    padding: 10px;
+}
+
 #title h1 {
     color: #000;
 }
